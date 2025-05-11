@@ -3,7 +3,9 @@
 use App\Http\Controllers\Api\Book\{
 	DestroyController,
 	IndexController,
-	ShowController
+	ShowController,
+	StorageController,
+	UpdateController
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,8 +14,8 @@ Route::get('/user', function (Request $request) {
 	return $request->user();
 })->middleware('auth:sanctum');
 
-Route::group(['prefix' => 'book'], function(){
-	Route::get('/', IndexController::class);
-	Route::get('/{id}', ShowController::class);
-	Route::delete('/{id}', DestroyController::class);
-});
+Route::get('/book', IndexController::class);
+Route::get('/book/{id}', ShowController::class);
+Route::post('/books', StorageController::class);
+Route::patch('/books/{id}', UpdateController::class);
+Route::delete('/book/{id}', DestroyController::class);
